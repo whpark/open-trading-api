@@ -1,27 +1,27 @@
 /*****************************************************************************
- *  ÇØ¿Ü ¼±¹° ÆÄÀÏ ±¸Á¶ (ffcode.mst)
+ *  í•´ì™¸ ì„ ë¬¼ íŒŒì¼ êµ¬ì¡° (ffcode.mst)
  ****************************************************************************/
 typedef struct ST_FFCODE_TBL
 {
-	char sSrsCd [ 32]; /* Á¾¸ñÄÚµå */
-	char sAutoOrdGnrlYN[ 1]; /* ¼­¹öÀÚµ¿ÁÖ¹® °¡´É Á¾¸ñ ¿©ºÎ */
-	char sAutoOrdTwapYN[ 1]; /* ¼­¹öÀÚµ¿ÁÖ¹® TWAP °¡´É Á¾¸ñ ¿©ºÎ */
-	char sAutoOrdEcnmYN[ 1]; /* ¼­¹öÀÚµ¿ °æÁ¦ÁöÇ¥ ÁÖ¹® °¡´É Á¾¸ñ ¿©ºÎ */
-	char sFiller [ 47]; /* ÇÊ·¯ */
-	char sSeriesKrNm [ 50]; /* Á¾¸ñÇÑ±Û¸í */
-	char sExchCd [ 10]; /* °Å·¡¼ÒÄÚµå (ISAM KEY 1) */
-	char sMrktCd [ 10]; /* Ç°¸ñÄÚµå (ISAM KEY 2) */
-	char sClasCd [ 3]; /* Ç°¸ñÁ¾·ù */
-	char sDispDesz [ 5]; /* Ãâ·Â ¼Ò¼öÁ¡ */
-	char sCalcDesz [ 5]; /* °è»ê ¼Ò¼öÁ¡ */
-	char sTickSz [ 14]; /* Æ½»çÀÌÁî */
-	char sTickVal [ 14]; /* Æ½°¡Ä¡ */
-	char sCtrtSz [ 10]; /* °è¾àÅ©±â */
-	char sDispDigit [ 4]; /* °¡°İÇ¥½ÃÁø¹ı */
-	char sMultiplier [ 10]; /* È¯»ê½Â¼ö */
-	char sNearFlg [ 1]; /* ÃÖ´Ù¿ù¹°¿©ºÎ 0:¿ø¿ù¹° 1:ÃÖ´Ù¿ù¹° */
-	char sNearFlgDt [ 1]; /* ÃÖ±Ù¿ù¹°¿©ºÎ 0:¿ø¿ù¹° 1:ÃÖ±Ù¿ù¹° */
-	char sSprdYN [ 1]; /* ½ºÇÁ·¹µå¿©ºÎ */
-	char sSprdLeg1YN [ 1]; /* ½ºÇÁ·¹µå±âÁØÁ¾¸ñ LEG1 ¿©ºÎ Y/N */
-	char sExchSubCd [ 2]; /* ¼­ºê °Å·¡¼Ò ÄÚµå */
+	char sSrsCd [ 32]; /* ì¢…ëª©ì½”ë“œ */
+	char sAutoOrdGnrlYN[ 1]; /* ì„œë²„ìë™ì£¼ë¬¸ ê°€ëŠ¥ ì¢…ëª© ì—¬ë¶€ */
+	char sAutoOrdTwapYN[ 1]; /* ì„œë²„ìë™ì£¼ë¬¸ TWAP ê°€ëŠ¥ ì¢…ëª© ì—¬ë¶€ */
+	char sAutoOrdEcnmYN[ 1]; /* ì„œë²„ìë™ ê²½ì œì§€í‘œ ì£¼ë¬¸ ê°€ëŠ¥ ì¢…ëª© ì—¬ë¶€ */
+	char sFiller [ 47]; /* í•„ëŸ¬ */
+	char sSeriesKrNm [ 50]; /* ì¢…ëª©í•œê¸€ëª… */
+	char sExchCd [ 10]; /* ê±°ë˜ì†Œì½”ë“œ (ISAM KEY 1) */
+	char sMrktCd [ 10]; /* í’ˆëª©ì½”ë“œ (ISAM KEY 2) */
+	char sClasCd [ 3]; /* í’ˆëª©ì¢…ë¥˜ */
+	char sDispDesz [ 5]; /* ì¶œë ¥ ì†Œìˆ˜ì  */
+	char sCalcDesz [ 5]; /* ê³„ì‚° ì†Œìˆ˜ì  */
+	char sTickSz [ 14]; /* í‹±ì‚¬ì´ì¦ˆ */
+	char sTickVal [ 14]; /* í‹±ê°€ì¹˜ */
+	char sCtrtSz [ 10]; /* ê³„ì•½í¬ê¸° */
+	char sDispDigit [ 4]; /* ê°€ê²©í‘œì‹œì§„ë²• */
+	char sMultiplier [ 10]; /* í™˜ì‚°ìŠ¹ìˆ˜ */
+	char sNearFlg [ 1]; /* ìµœë‹¤ì›”ë¬¼ì—¬ë¶€ 0:ì›ì›”ë¬¼ 1:ìµœë‹¤ì›”ë¬¼ */
+	char sNearFlgDt [ 1]; /* ìµœê·¼ì›”ë¬¼ì—¬ë¶€ 0:ì›ì›”ë¬¼ 1:ìµœê·¼ì›”ë¬¼ */
+	char sSprdYN [ 1]; /* ìŠ¤í”„ë ˆë“œì—¬ë¶€ */
+	char sSprdLeg1YN [ 1]; /* ìŠ¤í”„ë ˆë“œê¸°ì¤€ì¢…ëª© LEG1 ì—¬ë¶€ Y/N */
+	char sExchSubCd [ 2]; /* ì„œë¸Œ ê±°ë˜ì†Œ ì½”ë“œ */
 } FFCODE_TBL;
