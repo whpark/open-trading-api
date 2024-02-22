@@ -9,14 +9,14 @@ base_dir = os.getcwd()
 def get_theme_master_dataframe(base_dir):
 
     ssl._create_default_https_context = ssl._create_unverified_context
-    urllib.request.urlretrieve("https://new.real.download.dws.co.kr/common/master/theme_code.mst.zip", base_dir + "\\theme_code.zip")
-    os.chdir(base_dir)
+    urllib.request.urlretrieve("https://new.real.download.dws.co.kr/common/master/theme_code.mst.zip", base_dir + "theme_code.zip")
+    # os.chdir(base_dir)
 
-    kospi_zip = zipfile.ZipFile('theme_code.zip')
-    kospi_zip.extractall()
+    kospi_zip = zipfile.ZipFile(base_dir + 'theme_code.zip')
+    kospi_zip.extractall(base_dir)
     kospi_zip.close()
 
-    file_name = base_dir + "\\theme_code.mst"
+    file_name = base_dir + "theme_code.mst"
     df = pd.DataFrame(columns = ['테마코드', '테마명', '종목코드'])
 
     ridx = 1
@@ -31,6 +31,13 @@ def get_theme_master_dataframe(base_dir):
 
     return df
 
-df1 = get_theme_master_dataframe(base_dir)
-df1.to_excel('theme_code.xlsx',index=False)  # 현재 위치에 엑셀파일로 저장
-df1
+if __name__ == "__main__":
+    # 다운로드 및 저장 디렉토리 설정
+    base_dir = os.getcwd() + "\\data\\"
+    if not os.path.exists(base_dir):
+        os.makedirs(base_dir)
+
+    df1 = get_theme_master_dataframe(base_dir)
+    df1.to_excel(base_dir + 'theme_code.xlsx',index=False)  # 현재 위치에 엑셀파일로 저장
+    df1
+    

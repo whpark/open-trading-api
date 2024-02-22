@@ -6,31 +6,31 @@ import ssl
 import zipfile
 import os
 
-base_dir = os.getcwd()
-
 def kosdaq_master_download(base_dir, verbose=False):
 
-    cwd = os.getcwd()
-    if (verbose): print(f"current directory is {cwd}")
+    #cwd = os.getcwd()
+    #if (verbose): print(f"current directory is {cwd}")
+    if verbose:
+        print("Downloading directory is ", base_dir)
     ssl._create_default_https_context = ssl._create_unverified_context
     
     urllib.request.urlretrieve("https://new.real.download.dws.co.kr/common/master/kosdaq_code.mst.zip",
-                               base_dir + "\\kosdaq_code.zip")
-
-    os.chdir(base_dir)
-    if (verbose): print(f"change directory to {base_dir}")
-    kosdaq_zip = zipfile.ZipFile('kosdaq_code.zip')
-    kosdaq_zip.extractall()
+                               base_dir + "kosdaq_code.zip")
     
-    kosdaq_zip.close()
+    if True:
+        #os.chdir(base_dir)
+        #if (verbose): print(f"change directory to {base_dir}")
+        kosdaq_zip = zipfile.ZipFile(base_dir + 'kosdaq_code.zip')
+        kosdaq_zip.extractall(base_dir)
+        kosdaq_zip.close()
 
-    if os.path.exists("kosdaq_code.zip"):
-        os.remove("kosdaq_code.zip")
+        #if os.path.exists(base_dir + "kosdaq_code.zip"):
+        #    os.remove(base_dir + "kosdaq_code.zip")
 
 def get_kosdaq_master_dataframe(base_dir):
-    file_name = base_dir + "\\kosdaq_code.mst"
-    tmp_fil1 = base_dir + "\\kosdaq_code_part1.tmp"
-    tmp_fil2 = base_dir + "\\kosdaq_code_part2.tmp"
+    file_name = base_dir + "kosdaq_code.mst"
+    tmp_fil1 = base_dir + "kosdaq_code_part1.tmp"
+    tmp_fil2 = base_dir + "kosdaq_code_part2.tmp"
 
     wf1 = open(tmp_fil1, mode="w")
     wf2 = open(tmp_fil2, mode="w")
@@ -49,7 +49,7 @@ def get_kosdaq_master_dataframe(base_dir):
     wf2.close()
 
     part1_columns = ['단축코드','표준코드','한글종목명']
-    df1 = pd.read_csv(tmp_fil1, header=None, names=part1_columns, encoding='cp949')
+    df1 = pd.read_csv(tmp_fil1, header=None, names=part1_columns, encoding='utf-8')
 
     field_specs = [2, 1,
                    4, 4, 4, 1, 1,
@@ -97,8 +97,14 @@ def get_kosdaq_master_dataframe(base_dir):
 
     return df
 
-kosdaq_master_download(base_dir)
-df = get_kosdaq_master_dataframe(base_dir)
+if __name__ == "__main__":
+    # 다운로드 및 저장 디렉토리 설정
+    base_dir = os.getcwd() + "\\data\\"
+    if not os.path.exists(base_dir):
+        os.makedirs(base_dir)
 
-df.to_excel('kosdaq_code.xlsx',index=False)  # 현재 위치에 엑셀파일로 저장
-df
+    kosdaq_master_download(base_dir)
+    df = get_kosdaq_master_dataframe(base_dir)
+
+    df.to_excel(base_dir + 'kosdaq_code.xlsx',index=False)  # 현재 위치에 엑셀파일로 저장
+    df

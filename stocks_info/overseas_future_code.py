@@ -6,19 +6,17 @@ import ssl
 import zipfile
 import os
 
-base_dir = os.getcwd()
-
 def get_overseas_future_master_dataframe(base_dir):
 
     ssl._create_default_https_context = ssl._create_unverified_context
-    urllib.request.urlretrieve("https://new.real.download.dws.co.kr/common/master/ffcode.mst.zip", base_dir + "\\ffcode.mst.zip")
-    os.chdir(base_dir)
+    urllib.request.urlretrieve("https://new.real.download.dws.co.kr/common/master/ffcode.mst.zip", base_dir + "ffcode.mst.zip")
+    #os.chdir(base_dir)
 
-    nas_zip = zipfile.ZipFile('ffcode.mst.zip')
-    nas_zip.extractall()
+    nas_zip = zipfile.ZipFile(base_dir + 'ffcode.mst.zip')
+    nas_zip.extractall(base_dir)
     nas_zip.close()
 
-    file_name = base_dir + "\\ffcode.mst"
+    file_name = base_dir + "ffcode.mst"
     columns = ['종목코드', '서버자동주문 가능 종목 여부', '서버자동주문 TWAP 가능 종목 여부', '서버자동 경제지표 주문 가능 종목 여부', 
                '필러', '종목한글명', '거래소코드 (ISAM KEY 1)', '품목코드 (ISAM KEY 2)', '품목종류', '출력 소수점', '계산 소수점', 
                '틱사이즈', '틱가치', '계약크기', '가격표시진법', '환산승수', '최다월물여부 0:원월물 1:최다월물', 
@@ -53,9 +51,15 @@ def get_overseas_future_master_dataframe(base_dir):
             df.loc[ridx] = [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u]
             ridx += 1
             
-    df.to_excel('ffcode.xlsx',index=False)  # 현재 위치에 엑셀파일로 저장
+    df.to_excel(base_dir + 'ffcode.xlsx',index=False)  # 현재 위치에 엑셀파일로 저장
 
     return df
     
-df = get_overseas_future_master_dataframe(base_dir)
-print("Done")
+if __name__ == "__main__":
+    # 다운로드 및 저장 디렉토리 설정
+    base_dir = os.getcwd() + "\\data\\"
+    if not os.path.exists(base_dir):
+        os.makedirs(base_dir)
+
+    df = get_overseas_future_master_dataframe(base_dir)
+    print("Done")
